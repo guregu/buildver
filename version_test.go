@@ -35,6 +35,14 @@ func TestLess(t *testing.T) {
 	}
 }
 
+func TestLessWithEquals(t *testing.T) {
+	a, _ := New("1.2")
+	b, _ := New("1.2")
+	if a.Less(b) {
+		t.Error("1.2 = 1.2")
+	}
+}
+
 func TestVsInvalid(t *testing.T) {
 	a, _ := New("dog")
 	b, _ := New("4.1.10")

@@ -48,11 +48,17 @@ func (v Version) Less(other Version) bool {
 		}
 	}
 
-	if len(v.vers) > len(other.vers) {
+	switch {
+	case len(v.vers) > len(other.vers):
+		// we're longer, and thus more than the other one
 		return false
+	case len(v.vers) < len(other.vers):
+		// we're shorter, and thus less than the other one
+		return true
 	}
 
-	return true
+	// we're equal
+	return false
 }
 
 // Equals comapres two Versions, returning true if both are equal.
