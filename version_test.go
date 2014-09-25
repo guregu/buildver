@@ -20,11 +20,17 @@ func TestLess(t *testing.T) {
 	if !b.Less(a) {
 		t.Error("1.0.0.0 < 1.2.3.0")
 	}
+	if a.Less(b) {
+		t.Error("1.0.0.0 < 1.2.3.0")
+	}
 
 	c, _ := New("1.0")
 	d, _ := New("0.9")
 
 	if !d.Less(c) {
+		t.Error("0.9 < 1.0")
+	}
+	if c.Less(d) {
 		t.Error("0.9 < 1.0")
 	}
 }
