@@ -55,6 +55,19 @@ func (v Version) Less(other Version) bool {
 	return true
 }
 
+// Equals comapres two Versions, returning true if both are equal.
+func (v Version) Equals(other Version) bool {
+	if len(v.vers) != len(other.vers) {
+		return false
+	}
+	for i, ver := range v.vers {
+		if ver != other.vers[i] {
+			return false
+		}
+	}
+	return true
+}
+
 // String returns a string representation of this Version.
 func (v Version) String() string {
 	if v.vers == nil {

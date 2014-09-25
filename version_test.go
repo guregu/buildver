@@ -53,6 +53,36 @@ func TestMore(t *testing.T) {
 	}
 }
 
+func TestEquals(t *testing.T) {
+	a, _ := New("4.1.10.5")
+	b, _ := New("4.1.10.5")
+
+	if !a.Equals(b) || !b.Equals(a) {
+		t.Error("4.1.10.5 = 4.1.10.5")
+	}
+
+	c, _ := New("1.0.0.0.0")
+	d, _ := New("1")
+
+	if !c.Equals(d) || !d.Equals(c) {
+		t.Error("1.0.0.0.0 = 1")
+	}
+
+	e, _ := New("1.2")
+	f, _ := New("1")
+
+	if e.Equals(f) {
+		t.Error("1.2 ≠ 1")
+	}
+
+	g, _ := New("2.5")
+	h, _ := New("2.4")
+
+	if g.Equals(h) {
+		t.Error("2.5 ≠ 2.4")
+	}
+}
+
 func TestString(t *testing.T) {
 	a, _ := New("dog")
 	if str := a.String(); str != "0" {
