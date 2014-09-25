@@ -102,3 +102,14 @@ func TestString(t *testing.T) {
 		t.Error(str, "≠", "4.1.10")
 	}
 }
+
+func TestExtraLetters(t *testing.T) {
+	a, err := New("1.2a")
+	if err != nil {
+		t.Error("err should be nil but is", err)
+	}
+	b, _ := New("1.2")
+	if a.Less(b) {
+		t.Error("1.2a = 1.2")
+	}
+}

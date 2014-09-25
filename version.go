@@ -16,6 +16,7 @@ func New(ver string) (Version, error) {
 	split := strings.Split(ver, ".")
 	vers := make([]int, len(split))
 	for i, part := range split {
+		part = strings.TrimFunc(part, notDigitOrDot)
 		n, err := strconv.Atoi(part)
 		if err != nil {
 			return Version{}, err
