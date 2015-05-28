@@ -1,3 +1,4 @@
+// Package buildver helps compare period-separated version strings of arbitrary length.
 package buildver
 
 import (
@@ -5,7 +6,7 @@ import (
 	"strings"
 )
 
-// Version is a build version
+// Version is a build version of arbitrary length.
 type Version struct {
 	vers []int
 }
