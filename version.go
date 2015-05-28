@@ -24,18 +24,15 @@ func New(ver string) (Version, error) {
 		vers[i] = n
 	}
 
-	// remove meaningless zeroes!
-	clip := 0
-	for i := len(vers) - 1; i >= 0; i-- {
-		if vers[i] == 0 {
-			clip++
-		} else {
-			break
-		}
-	}
-	vers = vers[:len(vers)-clip]
-
+	vers = normalize(vers)
 	return Version{vers}, nil
+}
+
+// FromInts creates a new Version.
+// New("1.2.3") is equivalent to FromInts(1, 2, 3).
+func FromInts(versions ...int) Version {
+	versions = normalize(versions)
+	return Version{versions}
 }
 
 // Less compares two Versions, returning true if this version is less than the other.
@@ -75,6 +72,20 @@ func (v Version) Equals(other Version) bool {
 	return true
 }
 
+// Contains returns true if this Version has the same components as other, ignoring extra components.
+// For example, version 1.2.3 would contain versions 1, 1.2, and 1.2.3.
+func (v Version) Contains(other Version) bool {
+	if len(other.vers) > len(v.vers) || (other.vers == nil && v.vers != nil) {
+		return false
+	}
+	for i, ver := range other.vers {
+		if v.vers[i] != ver {
+			return false
+		}
+	}
+	return true
+}
+
 // String returns a string representation of this Version.
 func (v Version) String() string {
 	if v.vers == nil {
@@ -85,4 +96,17 @@ func (v Version) String() string {
 		strs[i] = strconv.Itoa(n)
 	}
 	return strings.Join(strs, ".")
+}
+
+// normalize removes meaningless zeroes
+func normalize(vers []int) []int {
+	clip := 0
+	for i := len(vers) - 1; i >= 0; i-- {
+		if vers[i] == 0 {
+			clip++
+		} else {
+			break
+		}
+	}
+	return vers[:len(vers)-clip]
 }
