@@ -99,28 +99,28 @@ func TestFromInts(t *testing.T) {
 	}
 }
 
-func TestContains(t *testing.T) {
-	a := FromInts(1, 2, 3)
-	b := FromInts(1, 2)
-	c := FromInts(1)
-	empty := FromInts()
-	bad := FromInts(1, 9)
+// func TestContains(t *testing.T) {
+// 	a := FromInts(1, 2, 3)
+// 	b := FromInts(1, 2)
+// 	c := FromInts(1)
+// 	empty := FromInts()
+// 	bad := FromInts(1, 9)
 
-	if !a.Contains(b) {
-		t.Error(a.String(), "should contain", b.String())
-	}
-	if !a.Contains(c) {
-		t.Error(a.String(), "should contain", c.String())
-	}
+// 	if !a.Contains(b) {
+// 		t.Error(a.String(), "should contain", b.String())
+// 	}
+// 	if !a.Contains(c) {
+// 		t.Error(a.String(), "should contain", c.String())
+// 	}
 
-	if a.Contains(empty) {
-		t.Error(a.String(), "should not contain an empty version")
-	}
+// 	if a.Contains(empty) {
+// 		t.Error(a.String(), "should not contain an empty version")
+// 	}
 
-	if a.Contains(bad) {
-		t.Error(a.String(), "should not contain", bad.String())
-	}
-}
+// 	if a.Contains(bad) {
+// 		t.Error(a.String(), "should not contain", bad.String())
+// 	}
+// }
 
 func TestString(t *testing.T) {
 	a, _ := New("dog")

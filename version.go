@@ -73,19 +73,21 @@ func (v Version) Equals(other Version) bool {
 	return true
 }
 
+// Contains will be temporarily disabled until I sort out how to deal with zeroes.
+
 // Contains returns true if this Version has the same components as other, ignoring extra components.
 // For example, version 1.2.3 would contain versions 1, 1.2, and 1.2.3.
-func (v Version) Contains(other Version) bool {
-	if len(other.vers) > len(v.vers) || (other.vers == nil && v.vers != nil) {
-		return false
-	}
-	for i, ver := range other.vers {
-		if v.vers[i] != ver {
-			return false
-		}
-	}
-	return true
-}
+// func (v Version) Contains(other Version) bool {
+// 	if len(other.vers) > len(v.vers) || (other.vers == nil && v.vers != nil) {
+// 		return false
+// 	}
+// 	for i, ver := range other.vers {
+// 		if v.vers[i] != ver {
+// 			return false
+// 		}
+// 	}
+// 	return true
+// }
 
 // String returns a string representation of this Version.
 func (v Version) String() string {
